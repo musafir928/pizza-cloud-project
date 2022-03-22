@@ -1,6 +1,5 @@
 package com.cydeo.pizzacloud.controller;
 
-import com.cydeo.pizzacloud.exception.PizzaNotFoundException;
 import com.cydeo.pizzacloud.model.Pizza;
 import com.cydeo.pizzacloud.model.PizzaOrder;
 import com.cydeo.pizzacloud.repository.PizzaRepository;
@@ -21,9 +20,11 @@ public class OrderController {
     }
 
     @GetMapping("/current")
-    public String orderForm(@RequestParam UUID pizzaId, Model model) {
+    public String orderForm(UUID pizzaId, Model model) {
 
         PizzaOrder pizzaOrder = new PizzaOrder();
+
+        // Fix the getPizza method below in line 49.
         pizzaOrder.setPizza(getPizza(pizzaId));
 
         model.addAttribute("pizzaOrder", pizzaOrder);
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @PostMapping("/{pizzaId}")
-    public String processOrder(@PathVariable("pizzaId") UUID pizzaId, PizzaOrder pizzaOrder) {
+    public String processOrder(UUID pizzaId, PizzaOrder pizzaOrder) {
 
         // Save the order
 
@@ -40,8 +41,10 @@ public class OrderController {
         return "redirect:/home";
     }
 
+    //TODO
     private Pizza getPizza(UUID pizzaId) {
-        return pizzaRepository.readAll().stream().filter(p -> p.getId().equals(pizzaId)).findFirst().orElseThrow(() -> new PizzaNotFoundException("Pizza not found!"));
+        // Get the pizza from repository based on it's id
+        return new Pizza();
     }
 
 }
