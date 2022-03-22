@@ -37,8 +37,6 @@ public class OrderController {
         // Save the order
 
         pizzaOrder.setPizza(getPizza(pizzaId));
-        System.out.println(pizzaOrder);
-        System.out.println("Order is processed");
         return "redirect:/home";
     }
 
