@@ -15,5 +15,4 @@ public class Pizza {
     private List<Cheese> cheeseList;
     private List<Sauce> sauceList;
     private List<Topping> toppingList;
-
 }
