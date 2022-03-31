@@ -20,7 +20,7 @@ public class OrderController {
     }
 
     @GetMapping("/current")
-    public String orderForm(UUID pizzaId, Model model) {
+    public String orderForm(@RequestParam UUID pizzaId, Model model) {
 
         PizzaOrder pizzaOrder = new PizzaOrder();
 
@@ -33,7 +33,8 @@ public class OrderController {
     }
 
     @PostMapping("/{pizzaId}")
-    public String processOrder(UUID pizzaId, PizzaOrder pizzaOrder) {
+    public String processOrder(@PathVariable UUID pizzaId, PizzaOrder pizzaOrder) {
+        System.out.println(pizzaId);
 
         // Save the order
 
@@ -41,10 +42,10 @@ public class OrderController {
         return "redirect:/home";
     }
 
-    //TODO
     private Pizza getPizza(UUID pizzaId) {
         // Get the pizza from repository based on it's id
-        return new Pizza();
+        System.out.println("pizzaRepository.getPizzaById(pizzaId) = " + pizzaRepository.getPizzaById(pizzaId).getId());
+        return pizzaRepository.getPizzaById(pizzaId);
     }
 
 }
